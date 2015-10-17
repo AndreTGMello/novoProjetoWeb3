@@ -61,26 +61,30 @@ public class CoffeeMakerTest {
 	 */
 	
 	private CoffeeMaker CM;
-	private Recipe r1;
-	private Recipe r2;
-	private Recipe r3;
-	private Recipe r4;
+	private Recipe receitaValida1;
+	private Recipe receitaValida2;
+	private Recipe receitaValida3;
+	private Recipe receitaValida4;
+	private Recipe receitaNomeRepetido1;
+	private Recipe receitaIngradientesRepetidos1;
 	
 	@Before
 	public void setUp() throws Exception {
 		CM = new CoffeeMaker();
-		r1 = new Recipe("Coffee",50,4,0,1,0);
-		r2 = new Recipe("Hot Chocolate",75,0,3,1,3);
-		r3 = new Recipe("Cold Chocolate",55,0,3,1,3);
-		r4 = new Recipe("Cold Coffee",55,5,0,1,0);
+		receitaValida1 = new Recipe("Cafe",50,4,0,1,0);
+		receitaValida2 = new Recipe("Chocolate Quente",75,0,3,1,3);
+		receitaValida3 = new Recipe("Chocolate Frio",55,0,3,1,3);
+		receitaValida4 = new Recipe("Cafe Frio",55,5,0,1,0);
+		receitaNomeRepetido1 = new Recipe("Cafe Extra",50,5,1,2,1);
+		receitaIngradientesRepetidos1 = new Recipe("Cafe",50,4,0,1,0);
 	}
 	
 	
-	/* Testa adicionar uma receita */
+	/* Testes para addRecipe - INICIO */
 	
 	@Test
-	public void testAddOneRecipe() throws AmountOfRecipeException, DuplicatedRecipeException{
-		boolean ok = CM.addRecipe(r1);
+	public void testaInsereUmaReceita() throws AmountOfRecipeException, DuplicatedRecipeException{
+		boolean ok = CM.addRecipe(receitaValida1);
 		assertTrue(ok);
 	}
 	
@@ -96,13 +100,14 @@ public class CoffeeMakerTest {
 //	
 	@Test
 	public void testaInsereQuatroReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
-		
+		boolean ok = CM.addRecipe(receitaValida1);
+		ok = CM.addRecipe(receitaValida2);
+		ok = CM.addRecipe(receitaValida3);
+		ok = CM.addRecipe(receitaValida4);
+		assertTrue(ok);
 	}
 	
-	@Test
-	public void testaInsereReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException{
-		
-	}
+	/* Testes para addRecipe - FIM */
 	
 	@Test
 	public void testaRemoveReceitaValida() throws AmountOfRecipeException, DuplicatedRecipeException{
@@ -113,6 +118,13 @@ public class CoffeeMakerTest {
 	public void testaRemoveReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException{
 		
 	}
+	
+	@Test
+	public void testaInsereReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException{
+		
+	}
+	
+
 	
 	
 	
