@@ -57,12 +57,6 @@ public class CoffeeMakerTest {
 	 * 
 	 * Vector<Recipe> getRecipes()
 	 * 
-	 * Classes de equival�ncia:
-	 * 
-	 * Valores limites:
-	 * 
-	 * Casos de teste:
-	 * 
 	 */
 	
 	private CoffeeMaker CM;
@@ -93,7 +87,7 @@ public class CoffeeMakerTest {
 		assertTrue(ok);
 	}
 
-	@Test
+	@Test (expected = AmountOfRecipeException.class)
 	public void testaInsereQuatroReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
 		boolean ok = CM.addRecipe(receitaValida1);
 		ok = CM.addRecipe(receitaValida2);
@@ -103,8 +97,24 @@ public class CoffeeMakerTest {
 	}
 	
 	@Test
-	public void testaInsereReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException{
-		
+	public void testaInsereReceitaNomeDuplicado() throws AmountOfRecipeException, DuplicatedRecipeException{
+		boolean ok = CM.addRecipe(receitaValida1);
+		ok = CM.addRecipe(receitaNomeRepetido1);
+		assertTrue(ok);
+	}
+	
+	@Test
+	public void testaInsereReceitaIngredientesRepetidos() throws AmountOfRecipeException, DuplicatedRecipeException{
+		boolean ok = CM.addRecipe(receitaValida1);
+		ok = CM.addRecipe(receitaIngradientesRepetidos1);
+		assertTrue(ok);
+	}
+	
+	@Test (expected = RecipeException.class)
+	public void testaInsereReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException, InvalidValueException{
+		Recipe receitaInvalida = new Recipe("", 0, 0, 0, 0, 0);
+		boolean ok = CM.addRecipe(receitaInvalida);
+		assertTrue(ok);
 	}
 	
 	/* Testes para addRecipe - FIM */
@@ -270,16 +280,20 @@ public class CoffeeMakerTest {
 		}
 	}
 	
-	/* Testes para makeCoffee - INICIO */
-	
-	
-	
 	/* Testes para makeCoffee - FIM */
 	
 	
 	/* Testes para getRecipes - INICIO */
 	
-	
+	@SuppressWarnings("null")
+	@Test
+	public void testaRetornaReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
+		CM.addRecipe(receitaValida1);
+		Vector<Recipe> receitasEsperadas = null;
+		receitasEsperadas.addElement(receitaValida1);
+		Vector<Recipe> receitas = CM.getRecipes();
+		assertEquals(receitasEsperadas, receitas);
+	}
 	
 	/* Testes para getRecipes - FIM */
 
