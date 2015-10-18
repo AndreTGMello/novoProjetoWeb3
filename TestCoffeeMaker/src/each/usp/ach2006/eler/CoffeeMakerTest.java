@@ -9,6 +9,7 @@ import each.usp.ach2006.adaptedfromcsc326.eler.CoffeeMaker;
 import each.usp.ach2006.adaptedfromcsc326.eler.Recipe;
 import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.AmountOfRecipeException;
 import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.DuplicatedRecipeException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InvalidValueException;
 import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.RecipeException;
 
 import static org.junit.Assert.assertEquals;
@@ -120,7 +121,7 @@ public class CoffeeMakerTest {
 	public void testaRemoveReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException, RecipeException{
 		CM.addRecipe(receitaValida1);
 		boolean ok = CM.deleteRecipe("Chocolate Quente");
-		assertEquals(true, ok);
+		assertEquals(false, ok);
 	}
 	
 	/* Testes para deleteRecipe - FIM */
@@ -128,56 +129,104 @@ public class CoffeeMakerTest {
 	
 	/* Testes para addCoffeeInventory - INICIO */
 	
+	@Test
+	public void testaRepoeCafeValido() throws InvalidValueException{
+		CM.addCoffeeInventory(1);
+	}
 	
+	@Test (expected = InvalidValueException.class)
+	public void testaRepoeCafeInvalido() throws InvalidValueException{
+		CM.addCoffeeInventory(81);
+	}
 	
 	/* Testes para addCoffeeInventory - FIM */
 	
 	
 	/* Testes para addMilkInventory - INICIO */
 	
+	@Test
+	public void testaRepoeLeiteValido() throws InvalidValueException{
+		CM.addCoffeeInventory(1);
+	}
 	
+	@Test (expected = InvalidValueException.class)
+	public void testaRepoeLeiteInvalido() throws InvalidValueException{
+		CM.addCoffeeInventory(81);
+	}
 	
 	/* Testes para addMilkInventory - FIM */
 	
 	
 	/* Testes para addSugarInventory - INICIO */
 	
+	@Test
+	public void testaRepoeAcucarValido() throws InvalidValueException{
+		CM.addCoffeeInventory(1);
+	}
 	
+	@Test (expected = InvalidValueException.class)
+	public void testaRepoeAcucarInvalido() throws InvalidValueException{
+		CM.addCoffeeInventory(81);
+	}
 	
 	/* Testes para addSugarInventory - FIM */
 	
 	
 	/* Testes para addChocolateInventory - INICIO */
 	
+	@Test
+	public void testaRepoeChocolateValido() throws InvalidValueException{
+		CM.addCoffeeInventory(1);
+	}
 	
+	@Test (expected = InvalidValueException.class)
+	public void testaRepoeChocolateInvalido() throws InvalidValueException{
+		CM.addCoffeeInventory(81);
+	}
 	
 	/* Testes para addChocolateInventory - FIM */
 	
 
 	/* Testes para checkCoffeeInventory - INICIO */
 	
-	
+	@Test
+	public void testaInventorioCafe() throws Exception{
+		int qtdCafe = CM.checkCoffeeInventory();
+		assertEquals(20, qtdCafe);
+	}
 	
 	/* Testes para checkCoffeeInventory - FIM */
 	
 	
 	/* Testes para checkMilkInventory - INICIO */
 	
-	
+	@Test
+	public void testaInventorioLeite() throws Exception{
+		int qtdCafe = CM.checkCoffeeInventory();
+		assertEquals(20, qtdCafe);
+	}
 	
 	/* Testes para checkMilkInventory - FIM */
 	
 	
 	/* Testes para checkSugarInventory - INICIO */
 	
-	
+	@Test
+	public void testaInventorioAcucar() throws Exception{
+		int qtdCafe = CM.checkCoffeeInventory();
+		assertEquals(20, qtdCafe);
+	}
 	
 	/* Testes para checkSugarInventory - FIM */
 	
 	
 	/* Testes para checkChocolateInventory - INICIO */
 	
-	
+	@Test
+	public void testaInventorioChocolate() throws Exception{
+		int qtdCafe = CM.checkCoffeeInventory();
+		assertEquals(20, qtdCafe);
+	}
 	
 	/* Testes para checkChocolateInventory - FIM */
 	
