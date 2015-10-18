@@ -9,6 +9,8 @@ import each.usp.ach2006.adaptedfromcsc326.eler.CoffeeMaker;
 import each.usp.ach2006.adaptedfromcsc326.eler.Recipe;
 import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.AmountOfRecipeException;
 import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.DuplicatedRecipeException;
+import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.RecipeException;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -20,9 +22,9 @@ import static org.junit.Assert.assertTrue;
  */
 public class CoffeeMakerTest {
 	
-	/* Segundo especificação:
-	 * Na classe CoffeeMakerTest devem ser escritos os casos de teste para testar as operações para adicionar receita,
-	 * apagar receita, adicionar ingredientes, verificar quantidade de ingredientes, fazer café e obter receitas.
+	/* Segundo especificaï¿½ï¿½o:
+	 * Na classe CoffeeMakerTest devem ser escritos os casos de teste para testar as operaï¿½ï¿½es para adicionar receita,
+	 * apagar receita, adicionar ingredientes, verificar quantidade de ingredientes, fazer cafï¿½ e obter receitas.
 	 */
 	
 	/* Classes a serem testadas:
@@ -52,7 +54,7 @@ public class CoffeeMakerTest {
 	 * 
 	 * Vector<Recipe> getRecipes()
 	 * 
-	 * Classes de equivalência:
+	 * Classes de equivalï¿½ncia:
 	 * 
 	 * Valores limites:
 	 * 
@@ -87,17 +89,7 @@ public class CoffeeMakerTest {
 		boolean ok = CM.addRecipe(receitaValida1);
 		assertTrue(ok);
 	}
-	
-//	@Test
-//	public void testaInsereDuasReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
-//		
-//	}
-//
-//	@Test
-//	public void testaInsereTresReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
-//		
-//	}
-//	
+
 	@Test
 	public void testaInsereQuatroReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
 		boolean ok = CM.addRecipe(receitaValida1);
@@ -107,25 +99,103 @@ public class CoffeeMakerTest {
 		assertTrue(ok);
 	}
 	
-	/* Testes para addRecipe - FIM */
-	
-	@Test
-	public void testaRemoveReceitaValida() throws AmountOfRecipeException, DuplicatedRecipeException{
-		
-	}
-	
-	@Test
-	public void testaRemoveReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException{
-		
-	}
-	
 	@Test
 	public void testaInsereReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException{
 		
 	}
 	
+	/* Testes para addRecipe - FIM */
+	
+	
+	/* Testes para deleteRecipe - INICIO */
+	
+	@Test
+	public void testaRemoveReceitaValida() throws RecipeException, AmountOfRecipeException, DuplicatedRecipeException{
+		CM.addRecipe(receitaValida1);
+		boolean ok = CM.deleteRecipe("Cafe");
+		assertEquals(true, ok);
+	}
+	
+	@Test
+	public void testaRemoveReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException, RecipeException{
+		CM.addRecipe(receitaValida1);
+		boolean ok = CM.deleteRecipe("Chocolate Quente");
+		assertEquals(true, ok);
+	}
+	
+	/* Testes para deleteRecipe - FIM */
+	
+	
+	/* Testes para addCoffeeInventory - INICIO */
+	
+	
+	
+	/* Testes para addCoffeeInventory - FIM */
+	
+	
+	/* Testes para addMilkInventory - INICIO */
+	
+	
+	
+	/* Testes para addMilkInventory - FIM */
+	
+	
+	/* Testes para addSugarInventory - INICIO */
+	
+	
+	
+	/* Testes para addSugarInventory - FIM */
+	
+	
+	/* Testes para addChocolateInventory - INICIO */
+	
+	
+	
+	/* Testes para addChocolateInventory - FIM */
+	
 
+	/* Testes para checkCoffeeInventory - INICIO */
 	
 	
 	
+	/* Testes para checkCoffeeInventory - FIM */
+	
+	
+	/* Testes para checkMilkInventory - INICIO */
+	
+	
+	
+	/* Testes para checkMilkInventory - FIM */
+	
+	
+	/* Testes para checkSugarInventory - INICIO */
+	
+	
+	
+	/* Testes para checkSugarInventory - FIM */
+	
+	
+	/* Testes para checkChocolateInventory - INICIO */
+	
+	
+	
+	/* Testes para checkChocolateInventory - FIM */
+	
+
+	/* Testes para makeCoffee - INICIO */
+	
+	
+	/* Testes para makeCoffee - INICIO */
+	
+	
+	
+	/* Testes para makeCoffee - FIM */
+	
+	
+	/* Testes para getRecipes - INICIO */
+	
+	
+	
+	/* Testes para getRecipes - FIM */
+
 }
