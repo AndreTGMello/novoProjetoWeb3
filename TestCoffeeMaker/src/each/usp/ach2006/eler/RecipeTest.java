@@ -5,7 +5,6 @@ import org.junit.Test;
 import each.usp.ach2006.adaptedfromcsc326.eler.Recipe;
 import each.usp.ach2006.adaptedfromcsc326.eler.exceptions.InvalidValueException;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class RecipeTest {
 	/* Testa a criação de uma receita */
@@ -17,6 +16,7 @@ public class RecipeTest {
 	public RecipeTest() {
 		
 	}
+	
 	/* Testes para construtor - INICIO*/
 	@Test (expected = InvalidValueException.class)
 	public void testeNomeVazio() throws InvalidValueException {
@@ -61,7 +61,25 @@ public class RecipeTest {
 	}
 	
 	@Test 
-	public void testeSemUmIngrediente() throws InvalidValueException {
+	public void testeSemCafe() throws InvalidValueException {
+		Recipe receita = new Recipe ("Coffee",50,0,1,3,5);
+		assertEquals(50,receita.getPrice());
+	}
+	
+	@Test 
+	public void testeSemLeite() throws InvalidValueException {
+		Recipe receita = new Recipe ("Coffee",50,4,0,3,5);
+		assertEquals(50,receita.getPrice());
+	}
+	
+	@Test 
+	public void testeSemAcucar() throws InvalidValueException {
+		Recipe receita = new Recipe ("Coffee",50,4,1,0,5);
+		assertEquals(50,receita.getPrice());
+	}
+	
+	@Test 
+	public void testeSemChocolate() throws InvalidValueException {
 		Recipe receita = new Recipe ("Coffee",50,4,1,3,0);
 		assertEquals(50,receita.getPrice());
 	}
@@ -84,6 +102,5 @@ public class RecipeTest {
 		Recipe receita = new Recipe("Coffee",50,0,0,0,0);
 		assertEquals(50,receita.getPrice());
 	}
-	
 	/* Testes para construtor - FIM */
 }
