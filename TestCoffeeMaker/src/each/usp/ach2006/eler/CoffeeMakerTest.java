@@ -3,6 +3,7 @@ package each.usp.ach2006.eler;
 import java.util.Vector;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import each.usp.ach2006.adaptedfromcsc326.eler.CoffeeMaker;
@@ -70,12 +71,12 @@ public class CoffeeMakerTest {
 	@Before
 	public void setUp() throws Exception {
 		CM = new CoffeeMaker();
-		receitaValida1 = new Recipe("Cafe",50,4,0,1,0);
-		receitaValida2 = new Recipe("Chocolate Quente",75,0,3,1,3);
-		receitaValida3 = new Recipe("Chocolate Frio",55,0,3,1,3);
-		receitaValida4 = new Recipe("Cafe Fraco",25,1,0,0,0);
+		receitaValida1 = new Recipe("Cafe",50,4,1,1,1);
+		receitaValida2 = new Recipe("Chocolate Quente",75,1,3,1,3);
+		receitaValida3 = new Recipe("Chocolate Frio",55,1,3,1,3);
+		receitaValida4 = new Recipe("Cafe Fraco",25,1,1,1,1);
 		receitaNomeRepetido1 = new Recipe("Cafe Extra",50,5,1,2,1);
-		receitaIngradientesRepetidos1 = new Recipe("Cafe",50,4,0,1,0);
+		receitaIngradientesRepetidos1 = new Recipe("Cafe",50,4,1,1,1);
 	}
 	
 	
@@ -213,9 +214,9 @@ public class CoffeeMakerTest {
 	/* Testes para checkMilkInventory - INICIO */
 	
 	@Test
-	public void testaInventorioLeite() throws Exception{
+	public void testaInventorioLeite(){
 		int qtdCafe = CM.checkCoffeeInventory();
-		assertEquals(20, qtdCafe);
+		//assertEquals(20, qtdCafe);
 	}
 	
 	/* Testes para checkMilkInventory - FIM */
