@@ -73,7 +73,7 @@ public class CoffeeMakerTest {
 		CM = new CoffeeMaker();
 		receitaValida1 = new Recipe("Cafe",50,4,1,1,1);
 		receitaValida2 = new Recipe("Chocolate Quente",75,1,3,1,3);
-		receitaValida3 = new Recipe("Chocolate Frio",55,1,3,1,3);
+		receitaValida3 = new Recipe("Chocolate Frio",55,1,3,2,3);
 		receitaValida4 = new Recipe("Cafe Fraco",25,1,1,1,1);
 		receitaNomeRepetido1 = new Recipe("Cafe Extra",50,5,1,2,1);
 		receitaIngradientesRepetidos1 = new Recipe("Cafe",50,4,1,1,1);
@@ -81,6 +81,14 @@ public class CoffeeMakerTest {
 	
 	
 	/* Testes para addRecipe - INICIO */
+	
+	/* -> DUVIDA <- */
+	@Test (expected = RecipeException.class)
+	public void testaInsereReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException, InvalidValueException{
+		Recipe receitaInvalida = new Recipe("", 0, 0, 0, 0, 0);
+		boolean ok = CM.addRecipe(receitaInvalida);
+		assertTrue(ok);
+	}
 	
 	@Test
 	public void testaInsereUmaReceita() throws AmountOfRecipeException, DuplicatedRecipeException{
@@ -104,17 +112,10 @@ public class CoffeeMakerTest {
 		assertTrue(ok);
 	}
 	
-	@Test
+	@Test (expected = DuplicatedRecipeException.class)
 	public void testaInsereReceitaIngredientesRepetidos() throws AmountOfRecipeException, DuplicatedRecipeException{
 		boolean ok = CM.addRecipe(receitaValida1);
 		ok = CM.addRecipe(receitaIngradientesRepetidos1);
-		assertTrue(ok);
-	}
-	
-	@Test (expected = RecipeException.class)
-	public void testaInsereReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException, InvalidValueException{
-		Recipe receitaInvalida = new Recipe("", 0, 0, 0, 0, 0);
-		boolean ok = CM.addRecipe(receitaInvalida);
 		assertTrue(ok);
 	}
 	
@@ -130,7 +131,7 @@ public class CoffeeMakerTest {
 		assertEquals(true, ok);
 	}
 	
-	@Test
+	@Test (expected = RecipeException.class)
 	public void testaRemoveReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException, RecipeException{
 		CM.addRecipe(receitaValida1);
 		boolean ok = CM.deleteRecipe("Chocolate Quente");
@@ -277,7 +278,7 @@ public class CoffeeMakerTest {
 		CM.addRecipe(receitaValida4);
 		/* Aqui utiliza-se a receitaValida4 para que seja possivel testar o valor limite 21 */
 		for(int i = 0; i < 20; i++){
-			CM.makeCoffee("Cafe Fraco", 25);
+			CM.makeCoffee("Cafe Fraco", 30);
 		}
 	}
 	
@@ -290,10 +291,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaRetornaReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
 		CM.addRecipe(receitaValida1);
-		Vector<Recipe> receitasEsperadas = null;
-		receitasEsperadas.addElement(receitaValida1);
-		Vector<Recipe> receitas = CM.getRecipes();
-		assertEquals(receitasEsperadas, receitas);
+		CM.getRecipes();
 	}
 	
 	/* Testes para getRecipes - FIM */
