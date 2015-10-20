@@ -138,6 +138,7 @@ public class CoffeeMakerTest {
 	public void testaRemoveReceitaValida() throws RecipeException, AmountOfRecipeException, DuplicatedRecipeException{
 		CM.addRecipe(receitaValida1);
 		boolean ok = CM.deleteRecipe("Cafe");
+//		boolean ok = CM.deleteRecipe(CM.getRecipes().get(0).getName());
 		assertEquals(true, ok);
 	}
 	
@@ -173,7 +174,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaRepoeLeiteValido() throws InvalidValueException{
 		CM.addMilkInventory(80);
-		int qtdLeite = CM.checkChocolateInventory();
+		int qtdLeite = CM.checkMilkInventory();
 		assertEquals(100, qtdLeite);
 	}
 	
@@ -190,7 +191,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaRepoeAcucarValido() throws InvalidValueException{
 		CM.addSugarInventory(80);
-		int qtdAcucar = CM.checkChocolateInventory();
+		int qtdAcucar = CM.checkSugarInventory();
 		assertEquals(100, qtdAcucar);
 	}
 	
@@ -206,7 +207,19 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaRepoeChocolateValido() throws InvalidValueException{
-		CM.addChocolateInventory(80);
+		/* Possivel teste 1 */
+//		CM.addChocolateInventory(80);
+		
+		/* Possivel teste 2 */
+		for(int i = 0; i < 100-CM.checkChocolateInventory(); i++){
+			CM.addChocolateInventory(1);
+		}
+
+		/* Possivel teste 3 */
+//		while(CM.checkChocolateInventory()<=100){
+//			CM.addChocolateInventory(1);
+//		}
+		
 		int qtdChocolate = CM.checkChocolateInventory();
 		assertEquals(100, qtdChocolate);
 	}
