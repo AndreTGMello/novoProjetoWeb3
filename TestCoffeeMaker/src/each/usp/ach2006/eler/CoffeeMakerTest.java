@@ -160,12 +160,12 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaRepoeLeiteValido() throws InvalidValueException{
-		CM.addCoffeeInventory(1);
+		CM.addMilkInventory(1);
 	}
 	
 	@Test (expected = InvalidValueException.class)
 	public void testaRepoeLeiteInvalido() throws InvalidValueException{
-		CM.addCoffeeInventory(81);
+		CM.addMilkInventory(81);
 	}
 	
 	/* Testes para addMilkInventory - FIM */
@@ -175,12 +175,12 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaRepoeAcucarValido() throws InvalidValueException{
-		CM.addCoffeeInventory(1);
+		CM.addSugarInventory(1);
 	}
 	
 	@Test (expected = InvalidValueException.class)
 	public void testaRepoeAcucarInvalido() throws InvalidValueException{
-		CM.addCoffeeInventory(81);
+		CM.addSugarInventory(81);
 	}
 	
 	/* Testes para addSugarInventory - FIM */
@@ -190,12 +190,12 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaRepoeChocolateValido() throws InvalidValueException{
-		CM.addCoffeeInventory(1);
+		CM.addChocolateInventory(1);
 	}
 	
 	@Test (expected = InvalidValueException.class)
 	public void testaRepoeChocolateInvalido() throws InvalidValueException{
-		CM.addCoffeeInventory(81);
+		CM.addChocolateInventory(81);
 	}
 	
 	/* Testes para addChocolateInventory - FIM */
@@ -205,8 +205,7 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaInventorioCafe() throws Exception{
-		int qtdCafe = CM.checkCoffeeInventory();
-		assertEquals(20, qtdCafe);
+		CM.checkCoffeeInventory();
 	}
 	
 	/* Testes para checkCoffeeInventory - FIM */
@@ -216,8 +215,7 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaInventorioLeite(){
-		int qtdCafe = CM.checkCoffeeInventory();
-		//assertEquals(20, qtdCafe);
+		CM.checkMilkInventory();
 	}
 	
 	/* Testes para checkMilkInventory - FIM */
@@ -227,8 +225,7 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaInventorioAcucar() throws Exception{
-		int qtdCafe = CM.checkCoffeeInventory();
-		assertEquals(20, qtdCafe);
+		CM.checkSugarInventory();
 	}
 	
 	/* Testes para checkSugarInventory - FIM */
@@ -238,8 +235,7 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaInventorioChocolate() throws Exception{
-		int qtdCafe = CM.checkCoffeeInventory();
-		assertEquals(20, qtdCafe);
+		int qtdCafe = CM.checkChocolateInventory();
 	}
 	
 	/* Testes para checkChocolateInventory - FIM */
