@@ -106,7 +106,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaInsereMenosQueLimiteReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C1, C2, C3
-		 * Valor-limite: */
+		 * Valor-limite: v1, v3, v4 */
 		
 		boolean ok = CM.addRecipe(receitaValida1);
 		assertTrue(ok);
@@ -115,7 +115,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaInsereLimiteReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C1, C2, C3
-		 * Valor-limite: */
+		 * Valor-limite: v2, v3, v4 */
 		
 		boolean ok = CM.addRecipe(receitaValida1);
 		ok = CM.addRecipe(receitaValida2);
@@ -126,7 +126,7 @@ public class CoffeeMakerTest {
 	@Test (expected = AmountOfRecipeException.class)
 	public void testaInsereQuatroReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C20, C2, C3
-		 * Valor-limite: */
+		 * Valor-limite: v19, v3, v4 */
 		
 		boolean ok = CM.addRecipe(receitaValida1);
 		ok = CM.addRecipe(receitaValida2);
@@ -138,7 +138,7 @@ public class CoffeeMakerTest {
 	@Test (expected = DuplicatedRecipeException.class)
 	public void testaInsereReceitaNomeDuplicado() throws AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C1, C21, C3
-		 * Valor-limite: */
+		 * Valor-limite: v1, v20, v4*/
 		
 		boolean ok = CM.addRecipe(receitaValida1);
 		ok = CM.addRecipe(receitaNomeRepetido1);
@@ -148,7 +148,7 @@ public class CoffeeMakerTest {
 	@Test (expected = DuplicatedRecipeException.class)
 	public void testaInsereReceitaIngredientesRepetidos() throws AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C1, C2, C22
-		 * Valor-limite: */
+		 * Valor-limite: v1, v3, v21 */
 		
 		boolean ok = CM.addRecipe(receitaValida1);
 		ok = CM.addRecipe(receitaIngradientesRepetidos1);
@@ -163,7 +163,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaRemoveReceitaValida() throws RecipeException, AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C4
-		 * Valor-limite: */
+		 * Valor-limite: - */
 		
 		CM.addRecipe(receitaValida1);
 		boolean ok = CM.deleteRecipe(CM.getRecipes().get(0).getName());
@@ -173,7 +173,7 @@ public class CoffeeMakerTest {
 	@Test (expected = RecipeException.class)
 	public void testaRemoveReceitaInvalida() throws AmountOfRecipeException, DuplicatedRecipeException, RecipeException{
 		/* Classe de equivalencia: C23
-		 * Valor-limite: */
+		 * Valor-limite: - */
 		
 		CM.addRecipe(receitaValida1);
 		boolean ok = CM.deleteRecipe("Suco de Laranja");
@@ -187,8 +187,8 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaRepoeCafeValido() throws InvalidValueException{
-		/* Classe de equivalencia: C5
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C5
+		 * Valor-limite: v1, v5 */
 		
 		CM.addCoffeeInventory(100-CM.checkCoffeeInventory());
 		int qtdCafe = CM.checkChocolateInventory();
@@ -197,8 +197,8 @@ public class CoffeeMakerTest {
 	
 	@Test (expected = InvalidValueException.class)
 	public void testaRepoeCafeInvalido() throws InvalidValueException{
-		/* Classe de equivalencia: C24
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C24
+		 * Valor-limite: v22 */
 		
 		CM.addCoffeeInventory(101-CM.checkCoffeeInventory());
 	}
@@ -210,8 +210,8 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaRepoeLeiteValido() throws InvalidValueException{
-		/* Classe de equivalencia: C6
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C6
+		 * Valor-limite: v6 */
 		
 		CM.addMilkInventory(100-CM.checkMilkInventory());
 		int qtdLeite = CM.checkMilkInventory();
@@ -220,8 +220,8 @@ public class CoffeeMakerTest {
 	
 	@Test (expected = InvalidValueException.class)
 	public void testaRepoeLeiteInvalido() throws InvalidValueException{
-		/* Classe de equivalencia: C25
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C25
+		 * Valor-limite: v23 */
 		
 		CM.addMilkInventory(101-CM.checkMilkInventory());
 	}
@@ -233,8 +233,8 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaRepoeAcucarValido() throws InvalidValueException{
-		/* Classe de equivalencia: C7
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C7
+		 * Valor-limite: v7 */
 		
 		CM.addSugarInventory(100-CM.checkSugarInventory());
 		int qtdAcucar = CM.checkSugarInventory();
@@ -243,8 +243,8 @@ public class CoffeeMakerTest {
 	
 	@Test (expected = InvalidValueException.class)
 	public void testaRepoeAcucarInvalido() throws InvalidValueException{
-		/* Classe de equivalencia: C26
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C26
+		 * Valor-limite: v24 */
 		
 		CM.addSugarInventory(101-CM.checkSugarInventory());
 	}
@@ -256,8 +256,8 @@ public class CoffeeMakerTest {
 	
 	@Test
 	public void testaRepoeChocolateValido() throws InvalidValueException{
-		/* Classe de equivalencia: C8
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C8
+		 * Valor-limite: v8 */
 		
 		CM.addChocolateInventory(100-CM.checkChocolateInventory());		
 		int qtdChocolate = CM.checkChocolateInventory();
@@ -266,8 +266,8 @@ public class CoffeeMakerTest {
 	
 	@Test (expected = InvalidValueException.class)
 	public void testaRepoeChocolateInvalido() throws InvalidValueException{
-		/* Classe de equivalencia: C27
-		 * Valor-limite: */
+		/* Classe de equivalencia: C1, C2, C3, C27
+		 * Valor-limite: 0 */
 		
 		CM.addChocolateInventory(101-CM.checkChocolateInventory());
 	}
@@ -280,7 +280,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaInventorioCafe() throws Exception{
 		/* Classe de equivalencia: C9
-		 * Valor-limite: */
+		 * Valor-limite: v9 */
 		
 		int qtdCafe = CM.checkCoffeeInventory();
 		assertEquals(20, qtdCafe);
@@ -294,7 +294,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaInventorioLeite(){
 		/* Classe de equivalencia: C10
-		 * Valor-limite: */
+		 * Valor-limite: v10 */
 		
 		int qtdLeite = CM.checkMilkInventory();
 		assertEquals(20, qtdLeite);
@@ -308,7 +308,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaInventorioAcucar() throws Exception{
 		/* Classe de equivalencia: C11
-		 * Valor-limite: */
+		 * Valor-limite: v11 */
 		
 		int qtdAcucar = CM.checkSugarInventory();
 		assertEquals(20, qtdAcucar);
@@ -322,7 +322,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaInventorioChocolate() throws Exception{
 		/* Classe de equivalencia: C12
-		 * Valor-limite: */
+		 * Valor-limite: v12 */
 		
 		int qtdChocolate = CM.checkChocolateInventory();
 		assertEquals(20, qtdChocolate);
@@ -336,7 +336,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaFazerCafeSemTroco() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C14, C15, C16, C17, C18
-		 * Valor-limite: */
+		 * Valor-limite: v13 */
 		
 		CM.addRecipe(receitaValida1);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice());
@@ -346,7 +346,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaFazerCafeComTroco() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C14, C15, C16, C17, C18
-		 * Valor-limite: */
+		 * Valor-limite: v14 */
 		
 		CM.addRecipe(receitaValida1);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
@@ -356,7 +356,7 @@ public class CoffeeMakerTest {
 	@Test (expected = InsufficientAmountOfMoneyException.class)
 	public void testaFazerCafeDinheiroInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C33, C14, C15, C16, C17
-		 * Valor-limite: */
+		 * Valor-limite: v30 */
 		
 		CM.addRecipe(receitaValida1);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()-1);			
@@ -366,7 +366,7 @@ public class CoffeeMakerTest {
 	@Test (expected = RecipeException.class)
 	public void testaFazerCafeReceitaInexistente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C32
-		 * Valor-limite: */
+		 * Valor-limite: - */
 		
 		CM.addRecipe(receitaValida1);
 		troco = CM.makeCoffee("Suco de laranja", CM.getRecipes().get(0).getPrice()+1);
@@ -376,7 +376,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaFazerCafeInventorioCafeLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C18
-		 * Valor-limite: */
+		 * Valor-limite: v14, v15 */
 		
 		CM.addRecipe(receitaTestaInventarioCafeLimite);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
@@ -386,7 +386,7 @@ public class CoffeeMakerTest {
 	@Test (expected = InventoryException.class)
 	public void testaFazerCafeInventorioCafeInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C34, C16, C17, C18
-		 * Valor-limite: */
+		 * Valor-limite: v14, v31 */
 		
 		CM.addRecipe(receitaTestaInventarioCafeInsuficiente);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
@@ -396,7 +396,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaFazerCafeInventorioLeiteLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C18
-		 * Valor-limite: */
+		 * Valor-limite: v14, v16 */
 		
 		CM.addRecipe(receitaTestaInventarioLeiteLimite);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
@@ -406,7 +406,7 @@ public class CoffeeMakerTest {
 	@Test (expected = InventoryException.class)
 	public void testaFazerCafeInventorioLeiteInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C35, C17, C18
-		 * Valor-limite: */
+		 * Valor-limite: v14, v32 */
 		
 		CM.addRecipe(receitaTestaInventarioLeiteInsuficiente);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
@@ -416,7 +416,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaFazerCafeInventorioAcucarLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C18
-		 * Valor-limite: */
+		 * Valor-limite: v14, v17 */
 		
 		CM.addRecipe(receitaTestaInventarioAcucarLimite);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
@@ -426,7 +426,7 @@ public class CoffeeMakerTest {
 	@Test (expected = InventoryException.class)
 	public void testaFazerCafeInventorioAcucarInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C36, C18
-		 * Valor-limite: */
+		 * Valor-limite: v14, v33 */
 		
 		CM.addRecipe(receitaTestaInventarioAcucarInsuficiente);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
@@ -436,7 +436,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaFazerCafeInventorioChocolateLimite() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C18
-		 * Valor-limite: */
+		 * Valor-limite: v14, v18 */
 		
 		CM.addRecipe(receitaTestaInventarioChocolateLimite);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
@@ -446,7 +446,7 @@ public class CoffeeMakerTest {
 	@Test (expected = InventoryException.class)
 	public void testaFazerCafeInventorioChocolateInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		/* Classe de equivalencia: C13, C15, C16, C17, C37
-		 * Valor-limite: */
+		 * Valor-limite: v14, v34 */
 		
 		CM.addRecipe(receitaTestaInventarioChocolateInsuficiente);
 		troco = CM.makeCoffee(CM.getRecipes().get(0).getName(), CM.getRecipes().get(0).getPrice()+1);
@@ -461,7 +461,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaRetornaReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C1, C2, C3, C38
-		 * Valor-limite: */
+		 * Valor-limite: - */
 		
 		CM.addRecipe(receitaValida1);
 		CM.addRecipe(receitaValida2);
@@ -476,7 +476,7 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaRetornaReceitasVazia() throws AmountOfRecipeException, DuplicatedRecipeException{
 		/* Classe de equivalencia: C1, C2, C3
-		 * Valor-limite: */
+		 * Valor-limite: - */
 		
 		//Vector<Recipe> receitas = null;
 		Vector<Recipe> receitas = new Vector<>();
