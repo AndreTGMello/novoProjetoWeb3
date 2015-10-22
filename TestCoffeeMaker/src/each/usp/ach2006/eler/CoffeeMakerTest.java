@@ -82,6 +82,11 @@ public class CoffeeMakerTest {
 		receitaValida4 = new Recipe("Cafe Fraco",25,1,1,1,1);
 		receitaNomeRepetido1 = new Recipe("Cafe",50,5,1,2,1);
 		receitaIngradientesRepetidos1 = new Recipe("Cafe Extra",50,4,1,1,1);
+	
+		/* Observação:
+		 * Impossivel criar reeita com quantidade de açucar = 0.
+		 */
+		
 		receitaTestaInventarioCafe = new Recipe ("Cafe Puro",1,1,0,1,0);
 		receitaTestaInventarioLeite = new Recipe ("Leite Puro",1,0,1,1,0);
 		receitaTestaInventarioAcucar = new Recipe ("Acucar Puro",1,0,0,1,0);
@@ -261,65 +266,65 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaFazerCafeSemTroco() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		CM.addRecipe(receitaValida1);
-		troco = CM.makeCoffee("Cafe", 50);
+		troco = CM.makeCoffee("Cafe", CM.getRecipes().get(0).getPrice());
 		assertEquals(0, troco);
 	}
 	
 	@Test
 	public void testaFazerCafeComTroco() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		CM.addRecipe(receitaValida1);
-		troco = CM.makeCoffee("Cafe", 51);
+		troco = CM.makeCoffee("Cafe", CM.getRecipes().get(0).getPrice()+1);
 		assertEquals(1, troco);
 	}
 
 	@Test (expected = InsufficientAmountOfMoneyException.class)
 	public void testaFazerCafeDinheiroInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		CM.addRecipe(receitaValida1);
-		troco = CM.makeCoffee("Cafe", 49);
-		assertEquals(49, troco);
+		troco = CM.makeCoffee("Cafe", CM.getRecipes().get(0).getPrice()-1);
+		assertEquals(CM.getRecipes().get(0).getPrice()-1, troco);
 	}
 	
 	@Test (expected = RecipeException.class)
 	public void testaFazerCafeReceitaInexistente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		CM.addRecipe(receitaValida1);
-		troco = CM.makeCoffee("Chocolate Quente", 50);
-		assertEquals(50, troco);
+		troco = CM.makeCoffee("Chocolate Quente", CM.getRecipes().get(0).getPrice());
+		assertEquals(CM.getRecipes().get(0).getPrice(), troco);
 	}
 
 	@Test (expected = InventoryException.class)
 	public void testaFazerCafeInventorioCafeInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		CM.addRecipe(receitaTestaInventarioCafe);
 		for(int i = 0; i < CM.checkCoffeeInventory()+1; i++){
-			troco = CM.makeCoffee("Cafe Puro", 2);
+			troco = CM.makeCoffee("Cafe Puro", CM.getRecipes().get(0).getPrice());
 		}
-		assertEquals(2, troco);
+		assertEquals(CM.getRecipes().get(0).getPrice(), troco);
 	}
 
 	@Test (expected = InventoryException.class)
 	public void testaFazerCafeInventorioLeiteInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		CM.addRecipe(receitaTestaInventarioLeite);
 		for(int i = 0; i < CM.checkMilkInventory()+1; i++){
-			troco = CM.makeCoffee("Leite Puro", 2);
+			troco = CM.makeCoffee("Leite Puro", CM.getRecipes().get(0).getPrice());
 		}
-		assertEquals(2, troco);
+		assertEquals(CM.getRecipes().get(0).getPrice(), troco);
 	}
 	
 	@Test (expected = InventoryException.class)
 	public void testaFazerCafeInventorioAcucarInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		CM.addRecipe(receitaTestaInventarioAcucar);
 		for(int i = 0; i < CM.checkSugarInventory()+1; i++){
-			troco = CM.makeCoffee("Acucar Puro", 2);
+			troco = CM.makeCoffee("Acucar Puro", CM.getRecipes().get(0).getPrice());
 		}
-		assertEquals(2, troco);
+		assertEquals(CM.getRecipes().get(0).getPrice(), troco);
 	}
 	
 	@Test (expected = InventoryException.class)
 	public void testaFazerCafeInventorioChocolateInsuficiente() throws AmountOfRecipeException, DuplicatedRecipeException, InsufficientAmountOfMoneyException, RecipeException, InventoryException, InvalidValueException{
 		CM.addRecipe(receitaTestaInventarioChocolate);
 		for(int i = 0; i < CM.checkChocolateInventory()+1; i++){
-			troco = CM.makeCoffee("Cafe Chocolate", 2);
+			troco = CM.makeCoffee("Cafe Chocolate", CM.getRecipes().get(0).getPrice());
 		}
-		assertEquals(2, troco);
+		assertEquals(CM.getRecipes().get(0).getPrice(), troco);
 	}
 	/* Testes para makeCoffee - FIM */
 	
@@ -329,7 +334,13 @@ public class CoffeeMakerTest {
 	@Test
 	public void testaRetornaReceitas() throws AmountOfRecipeException, DuplicatedRecipeException{
 		CM.addRecipe(receitaValida1);
-		CM.getRecipes();
+		CM.addRecipe(receitaValida2);
+		CM.addRecipe(receitaValida3);
+		Vector<Recipe> receitas = new Vector<>();
+		receitas.addElement(receitaValida1);
+		receitas.addElement(receitaValida2);
+		receitas.addElement(receitaValida3);
+		assertEquals(receitas, CM.getRecipes());
 	}
 	
 	/* Testes para getRecipes - FIM */
